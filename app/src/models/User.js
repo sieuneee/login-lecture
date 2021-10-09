@@ -6,15 +6,16 @@ class User{
     constructor(body){
         this.body = body;
     }
-    login(){
+    async login(){
         const client = this.body;
-        const {id, psword} = UserStorage.getUserInfo(client.id);
+        //await은 promise를 반환하는 것에만 사용 가능 (.then()도 가능)
+        const {id, psword} = await UserStorage.getUserInfo(client.id);
         
         if(id){
             if(id===client.id && psword===client.psword){
                 return {sucess:true};
             }
-            return {sucess:false, msg:"비밀번호가 틀렸씁니다."};
+            return {sucess:false, msg:"비밀번호가 틀렸습니다."};
         }
         return {sucess:false, msg:"존재하지 않는 아이디입니다."};
     
