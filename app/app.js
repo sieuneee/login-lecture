@@ -2,6 +2,9 @@
 
 //모듈
 const express = require("express");
+const dotenv = require("dotenv");
+dotenv.config(); //환경변수 관리 (OS에 상관없이 환경변수 등록, 관리 가능하게 함)
+
 const app = express();
 
 //라우팅
