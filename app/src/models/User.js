@@ -10,17 +10,17 @@ class User{
         const client = this.body;
         //await은 promise를 반환하는 것에만 사용 가능 (.then()도 가능)
         try{
-            const {id, psword} = await UserStorage.getUserInfo(client.id);
+            const user = await UserStorage.getUserInfo(client.id);
         
-            if(id){
-                if(id===client.id && psword===client.psword){
-                    return {sucess:true};
+            if(user){
+                if(user.id===client.id && user.psword===client.psword){
+                    return {success:true};
                 }
-                return {sucess:false, msg:"비밀번호가 틀렸습니다."};
+                return {success:false, msg:"비밀번호가 틀렸습니다."};
             }
-            return {sucess:false, msg:"존재하지 않는 아이디입니다."};
+            return {success:false, msg:"존재하지 않는 아이디입니다."};
         } catch(err){
-            return {sucess:false, err};
+            return {success:false, err};
         }
     }
     async register(){
@@ -29,7 +29,7 @@ class User{
             const response = await UserStorage.save(client);
             return response;
         } catch(err){
-            return { sucess:false, err };
+            return { success:false, err };
         }
     }
 }
